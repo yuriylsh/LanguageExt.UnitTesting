@@ -14,11 +14,11 @@
     <PackageLicenseUrl>https://github.com/yuriylsh/LanguageExt.UnitTesting/blob/master/LICENSE</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/yuriylsh/LanguageExt.UnitTesting</RepositoryUrl>
     <PackageTags>LanguageExt</PackageTags>
-    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+    <PackageReleaseNotes>Renaming Validtion extenstion methods to be consistent with other types.</PackageReleaseNotes>
     <Copyright>Yuriy Lyeshchenko © 2018</Copyright>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.0.0</Version>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
+    <Version>2.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
