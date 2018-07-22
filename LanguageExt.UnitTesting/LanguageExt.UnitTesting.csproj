@@ -22,7 +22,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LanguageExt.Core" Version="2.1.32" />
+    <PackageReference Include="LanguageExt.Core" Version="3.0.19" />
   </ItemGroup>
 
 </Project>

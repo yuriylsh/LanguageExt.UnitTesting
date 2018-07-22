@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using static LanguageExt.Prelude;
 
 namespace LanguageExt.UnitTesting.Tests
@@ -62,7 +63,7 @@ namespace LanguageExt.UnitTesting.Tests
             public IEnumerator<object[]> GetEnumerator()
             {
                 var fail = TryAsync<string>(() => throw new Exception());
-                var success = TryAsync(() => "success");
+                var success = TryAsync(() => Task.FromResult("success"));
                 yield return new object[] {fail };
                 yield return new object[] {success};
             }
