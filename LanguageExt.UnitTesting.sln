@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageExt.UnitTesting", "LanguageExt.UnitTesting\LanguageExt.UnitTesting.csproj", "{318C847C-584C-4853-AEE5-7D460A0C175D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LanguageExt.UnitTesting", "LanguageExt.UnitTesting\LanguageExt.UnitTesting.csproj", "{318C847C-584C-4853-AEE5-7D460A0C175D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageExt.UnitTesting.Tests", "LanguageExt.UnitTesting.Tests\LanguageExt.UnitTesting.Tests.csproj", "{4A1F06AE-5010-4142-B1F3-340A564A958B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{318C847C-584C-4853-AEE5-7D460A0C175D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{318C847C-584C-4853-AEE5-7D460A0C175D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{318C847C-584C-4853-AEE5-7D460A0C175D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A1F06AE-5010-4142-B1F3-340A564A958B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A1F06AE-5010-4142-B1F3-340A564A958B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A1F06AE-5010-4142-B1F3-340A564A958B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A1F06AE-5010-4142-B1F3-340A564A958B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
