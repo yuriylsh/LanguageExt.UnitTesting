@@ -28,8 +28,23 @@ Validation<string, int> subject = UnitUnderTest();
 subject.ShouldBeSuccess(x => Assert.Equal(5, x));
 
 // the following line throws an exception if subject does not represent failed validation
-// or in case of failed validation the failure value does not meet expectation.
+// or in case of failed validation the failure value does not meet expectation
 subject.ShouldBeFail(errors => Assert("value is not valid", errors.First()));
+```
+
+## Either
+* ```ShouldBeRight<TLeft, TRight>(Action<TRight> rightValidation)```
+* ```ShouldBeLeft<TLeft, TRight>(Action<TLeft> leftValidation)```
+```C#
+Either<string, int> subject = UnitUnderTest();
+
+// the following line throws an exception if subject represents left side of Either
+// or in case of right side of Either when the integer value does not equal 5
+subject.ShouldBeRight(right => Assert.Equal(5, right));
+
+// the following line throws an exception if subject represents right side of Either
+// or in case of left side of Either when the string value does not equal "abcd"
+subject.ShouldBeLeft(left => Assert.Equal("abcd", left));
 ```
 
 ## Try
