@@ -11,7 +11,7 @@ Option<int> subject = UnitUnderTest();
 
 // the following line throws an exception if subject is Option<int>.None 
 // or the integer value wrapped by Some does not equal 5
-subject.ShouldBeSome(x => Assert.Equal(5, x));
+subject.ShouldBeSome(some => Assert.Equal(5, some));
 
 // the following line throws an exception if subject is not Option<int>.None
 subject.ShouldBeNone();
@@ -25,7 +25,7 @@ Validation<string, int> subject = UnitUnderTest();
 
 // the following line throws an exception if subject represents failure
 // or in case of successful validation the integer value does not equal 5
-subject.ShouldBeSuccess(x => Assert.Equal(5, x));
+subject.ShouldBeSuccess(success => Assert.Equal(5, success));
 
 // the following line throws an exception if subject does not represent failed validation
 // or in case of failed validation the failure value does not meet expectation
@@ -55,7 +55,7 @@ Try<int> subject = UnitUnderTest();
 
 // the following line throws an exception if subject represents failure
 // or in case of successful try the integer value does not equal 5
-subject.ShouldBeSuccess(x => Assert.Equal(5, x));
+subject.ShouldBeSuccess(success => Assert.Equal(5, success));
 
 // the following line throws an exception if subject does not represent failure
 // or in case of failure the exception has wrong message
@@ -70,7 +70,7 @@ TryAsync<int> subject = UnitUnderTest();
 
 // the following line throws an exception if subject represents failure
 // or in case of successful try the integer value does not equal 5
-await subject.ShouldBeSuccess(x => Assert.Equal(5, x));
+await subject.ShouldBeSuccess(success => Assert.Equal(5, success));
 
 // the following line throws an exception if subject does not represent failure
 // or in case of failure the  exception has wrong message
@@ -86,7 +86,7 @@ TryOptionAsync<int> subject = UnitUnderTest();
 
 // the following line throws an exception if subject represents failure or Option<T>.None
 // or the integer value wrapped by Some does not equal 5
-await subject.ShouldBeSome(x => Assert.Equal(5, x));
+await subject.ShouldBeSome(some => Assert.Equal(5, some));
 
 // the following line throws an exception if subject is not Option<int>.None
 await subject.ShouldBeNone();
