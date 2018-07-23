@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using Xunit;
 using static LanguageExt.UnitTesting.Tests.TestsHelper;
 
@@ -6,40 +7,32 @@ namespace LanguageExt.UnitTesting.Tests
 {
     public class OptionExtensionsTests
     {
-        [Theory]
-        [ClassData(typeof(OptionGenerator))]
-        public void ShouldBeX_GiveOtherSide_Throws(Option<string> option)
+        [Fact]
+        public void ShouldBeSome_GivenNone_Throws()
         {
-            Action act = null;
-            option.Match(
-                some => act = () => option.ShouldBeNone(),
-                () => act = () => option.ShouldBeSome(ValidationNoop));
-
-            Assert.Throws<Exception>(act);
+            Action act = () => GetNone().ShouldBeSome(ValidationNoop);
+            act.Should().Throw<Exception>().WithMessage("Expected Some, got None instead.");
         }
 
-        [Theory]
-        [ClassData(typeof(OptionGenerator))]
-        public void ShouldBeX_GivenCorrectOption_ExecutesValidaion(Option<string> option)
+        [Fact]
+        public void ShouldBeNone_GivenSome_Throws()
         {
-            Action validation = null;
-            option.Match(
-                some => validation = SomeValidation,
-                () => validation = NoneValidation);
-
-            validation();
-
-            void SomeValidation()
-            {
-                var validationSideEffect = false;
-                option.ShouldBeSome(x => validationSideEffect = true);
-                Assert.True(validationSideEffect);
-            }
-
-            void NoneValidation()
-            {
-                option.ShouldBeNone();
-            }
+            Action act = () => GetSome().ShouldBeNone();
+            act.Should().Throw<Exception>().WithMessage("Expected None, got Some instead.");
         }
+
+        [Fact]
+        public void ShouldBeSome_GivenSome_RunsValidation()
+        {
+            var validationRan = false;
+            GetSome().ShouldBeSome(x => validationRan = true);
+            validationRan.Should().BeTrue();
+        }
+
+        [Fact]
+        public void ShouldBeNone_GivenNone_DoesNotThrow() => GetNone().ShouldBeNone();
+
+        private static Option<string> GetNone() => Option<string>.None;
+        private static Option<string> GetSome() => "some";
     }
 }

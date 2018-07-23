@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using Xunit;
 using static LanguageExt.UnitTesting.Tests.TestsHelper;
 
@@ -6,30 +7,37 @@ namespace LanguageExt.UnitTesting.Tests
 {
     public class EitherExtensionsTests
     {
-        [Theory]
-        [ClassData(typeof(EitherGenerator))]
-        public void ShouldBeSide_GivenOppositeSide_Throws(Either<int, string> either)
+        [Fact]
+        public void ShouldBeRight_GivenLeft_Throws()
         {
-            Action act = null;
-
-            either.Match(
-                right => act = () => either.ShouldBeLeft(ValidationNoop),
-                left => act = () => either.ShouldBeRight(ValidationNoop));
-
-            Assert.Throws<Exception>(act);
+            Action act = () => GetLeft().ShouldBeRight(ValidationNoop);
+            act.Should().Throw<Exception>().WithMessage("Expected Right, got Left instead.");
         }
 
-        [Theory]
-        [ClassData(typeof(EitherGenerator))]
-        public void ShouldBeSide_GivenCorrectSide_RunsValidation(Either<int, string> either)
+        [Fact]
+        public void ShouldBeLeft_GivenRight_Throws()
         {
-            var validationSideEffect = false;
-
-            either.Match(
-                right => either.ShouldBeRight(x => validationSideEffect = true),
-                left => either.ShouldBeLeft(x => validationSideEffect = true));
-
-            Assert.True(validationSideEffect);
+            Action act = () => GetRight().ShouldBeLeft(ValidationNoop);
+            act.Should().Throw<Exception>().WithMessage("Expected Left, got Right instead.");
         }
+
+        [Fact]
+        public void ShouldBeLeft_GivenLeft_RunsValidation()
+        {
+            var validationRan = false;
+            GetLeft().ShouldBeLeft(x => validationRan = true);
+            validationRan.Should().BeTrue();
+        }
+
+        [Fact]
+        public void ShouldBeRight_GivenRight_RunsValidation()
+        {
+            var validationRan = false;
+            GetRight().ShouldBeRight(x => validationRan = true);
+            validationRan.Should().BeTrue();
+        }
+
+        private static Either<int, string> GetLeft() => 123;
+        private static Either<int, string> GetRight() => "right";
     }
 }

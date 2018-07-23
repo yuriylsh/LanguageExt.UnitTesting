@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using Xunit;
 using static LanguageExt.UnitTesting.Tests.TestsHelper;
 
@@ -6,29 +7,37 @@ namespace LanguageExt.UnitTesting.Tests
 {
     public class TryExtensionsTests
     {
-        [Theory]
-        [ClassData(typeof(TryGenerator))]
-        public void ShouldBeX_GivenOppositeSide_Throws(Try<string> @try)
+        [Fact]
+        public void ShouldBeFail_GivenSuccess_Throws()
         {
-            Action act = null;
-            @try.Match(
-                success => act = () => @try.ShouldBeFail(ValidationNoop),
-                fail => act = () => @try.ShouldBeSuccess(ValidationNoop));
-
-            Assert.Throws<Exception>(act);
+            Action act = () => GetSuccess().ShouldBeFail(ValidationNoop);
+            act.Should().Throw<Exception>().WithMessage("Expected Fail, got Success instead.");
         }
 
-        [Theory]
-        [ClassData(typeof(TryGenerator))]
-        public void ShouldBeX_GivenCorrectSide_RunsValidation(Try<string> @try)
+        [Fact]
+        public void ShouldBeSuccess_GivenFail_Throws()
         {
-            var validationSideEffect = false;
-
-            @try.Match(
-                success => @try.ShouldBeSuccess(x => validationSideEffect = true),
-                fail => @try.ShouldBeFail(x => validationSideEffect = true));
-
-            Assert.True(validationSideEffect);
+            Action act = () => GetFail().ShouldBeSuccess(ValidationNoop);
+            act.Should().Throw<Exception>().WithMessage("Expected Success, got Fail instead.");
         }
+
+        [Fact]
+        public void ShouldBeFail_GivenFail_RunsValidation()
+        {
+            var validationRan = false;
+            GetFail().ShouldBeFail(x => validationRan = true);
+            validationRan.Should().BeTrue();
+        }
+
+        [Fact]
+        public void ShouldBeSuccess_GivenSuccess_RunsValidation()
+        {
+            var validationRan = false;
+            GetSuccess().ShouldBeSuccess(x => validationRan = true);
+            validationRan.Should().BeTrue();
+        }
+
+        private static Try<string> GetFail() => () => throw new Exception();
+        private static Try<string> GetSuccess() => () => "success";
     }
 }

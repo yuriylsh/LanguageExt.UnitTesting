@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using Xunit;
 using static LanguageExt.UnitTesting.Tests.TestsHelper;
 
@@ -6,29 +7,37 @@ namespace LanguageExt.UnitTesting.Tests
 {
     public class ValidationExtensionsTests
     {
-        [Theory]
-        [ClassData(typeof(ValidationGenerator))]
-        public void ShouldBeX_GivenOppositeSide_Throws(Validation<int, string> validation)
+        [Fact]
+        public void ShouldBeFail_GivenSuccess_Throws()
         {
-            Action act = null;
-            validation.Match(
-                success => act = () => validation.ShouldBeFail(ValidationNoop),
-                fail => act = () => validation.ShouldBeSuccess(ValidationNoop));
-
-            Assert.Throws<Exception>(act);
+            Action act = () => GetSuccess().ShouldBeFail(ValidationNoop);
+            act.Should().Throw<Exception>().WithMessage("Expected Fail, got Success instead.");
         }
 
-        [Theory]
-        [ClassData(typeof(ValidationGenerator))]
-        public void ShouldBeX_GivenCorrectSide_RunsValidation(Validation<int, string> validation)
+        [Fact]
+        public void ShouldBeSuccess_GivenFail_Throws()
         {
-            var validationSideEffect = false;
-
-            validation.Match(
-                success => validation.ShouldBeSuccess(x => validationSideEffect = true),
-                fail => validation.ShouldBeFail(x => validationSideEffect = true));
-
-            Assert.True(validationSideEffect);
+            Action act = () => GetFail().ShouldBeSuccess(ValidationNoop);
+            act.Should().Throw<Exception>().WithMessage("Expected Success, got Fail instead.");
         }
+
+        [Fact]
+        public void ShouldBeFail_GivenFail_RunsValidation()
+        {
+            var validationRan = false;
+            GetFail().ShouldBeFail(x => validationRan = true);
+            validationRan.Should().BeTrue();
+        }
+
+        [Fact]
+        public void ShouldBeSuccess_GivenSuccess_RunsValidation()
+        {
+            var validationRan = false;
+            GetSuccess().ShouldBeSuccess(x => validationRan = true);
+            validationRan.Should().BeTrue();
+        }
+
+        private static Validation<int, string> GetFail() => 123;
+        private static Validation<int, string> GetSuccess() => "success";
     }
 }
