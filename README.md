@@ -47,6 +47,22 @@ subject.ShouldBeRight(right => Assert.Equal(5, right));
 subject.ShouldBeLeft(left => Assert.Equal("abcd", left));
 ```
 
+
+## EitherAsync
+* ```ShouldBeRight<TLeft, TRight>(Action<TRight> rightValidation)```
+* ```ShouldBeLeft<TLeft, TRight>(Action<TLeft> leftValidation)```
+```C#
+EitherAsync<string, int> subject = UnitUnderTest();
+
+// the following line throws an exception if subject represents left side of Either
+// or in case of right side of Either when the integer value does not equal 5
+await subject.ShouldBeRight(right => Assert.Equal(5, right));
+
+// the following line throws an exception if subject represents right side of Either
+// or in case of left side of Either when the string value does not equal "abcd"
+await subject.ShouldBeLeft(left => Assert.Equal("abcd", left));
+```
+
 ## Try
 * ```ShouldBeSuccess<T>(Action<T> successValidation)```
 * ```ShouldBeFail<T>(Action<Exception> failValidation)```
