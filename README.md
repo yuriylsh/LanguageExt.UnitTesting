@@ -1,7 +1,7 @@
 # LanguageExt.UnitTesting
 Extension methods to simplify writing unit tests for code written using LanguageExt library. These extension methods throw an exception if expectation fails.
 
-Avalable as ```LanguageExt.UnitTesting``` nuget package.
+Avalable as [LanguageExt.UnitTesting](https://www.nuget.org/packages/LanguageExt.UnitTesting/ "nuget package url") nuget package.
 
 ## Option
 * ```ShouldBeSome<T>(Action<T> someValidation)```
