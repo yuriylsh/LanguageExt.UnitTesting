@@ -21,8 +21,8 @@ namespace LanguageExt.UnitTesting
         
         public static async Task ShouldBeFail<T>(this TryOptionAsync<T> @this, Action<Exception> failValidation)
             => await @this.Match(
-                Some: Common.ThrowIfSome,
-                None: Common.ThrowIfNone,
+                Some: _ => throw new Exception("Expected Fail, got Some instead"),
+                None: () => throw new Exception("Expected Fail, got None instead"),
                 Fail: ex => failValidation(ex)
             );
     }
