@@ -5,24 +5,24 @@ using static LanguageExt.UnitTesting.Tests.TestsHelper;
 
 namespace LanguageExt.UnitTesting.Tests
 {
-    public class TryExtensionsTests
+    public static class TryExtensionsTests
     {
         [Fact]
-        public void ShouldBeFail_GivenSuccess_Throws()
+        public static void ShouldBeFail_GivenSuccess_Throws()
         {
             Action act = () => GetSuccess().ShouldBeFail(ValidationNoop);
             act.Should().Throw<Exception>().WithMessage("Expected Fail, got Success instead.");
         }
 
         [Fact]
-        public void ShouldBeSuccess_GivenFail_Throws()
+        public static void ShouldBeSuccess_GivenFail_Throws()
         {
             Action act = () => GetFail().ShouldBeSuccess(ValidationNoop);
             act.Should().Throw<Exception>().WithMessage("Expected Success, got Fail instead.");
         }
 
         [Fact]
-        public void ShouldBeFail_GivenFail_RunsValidation()
+        public static void ShouldBeFail_GivenFail_RunsValidation()
         {
             var validationRan = false;
             GetFail().ShouldBeFail(x => validationRan = true);
@@ -30,7 +30,7 @@ namespace LanguageExt.UnitTesting.Tests
         }
 
         [Fact]
-        public void ShouldBeSuccess_GivenSuccess_RunsValidation()
+        public static void ShouldBeSuccess_GivenSuccess_RunsValidation()
         {
             var validationRan = false;
             GetSuccess().ShouldBeSuccess(x => validationRan = true);

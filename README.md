@@ -93,6 +93,25 @@ await subject.ShouldBeSuccess(success => Assert.Equal(5, success));
 await subject.ShouldBeFail(ex => Assert.Equal("something went wrong", ex.Message));
 ```
 
+## TryOption
+* ```ShouldBeSome<T>(Action<T> someValidation)```
+* ```ShouldBeNone<T>()```
+* ```ShouldBeFail<T>(Action<Exception> failValidation)```
+```C#
+TryOption<int> subject = UnitUnderTest();
+
+// the following line throws an exception if subject represents failure or Option<T>.None
+// or the integer value wrapped by Some does not equal 5
+subject.ShouldBeSome(some => Assert.Equal(5, some));
+
+// the following line throws an exception if subject is not Option<int>.None
+subject.ShouldBeNone();
+
+// the following line throws an exception if subject does not represent failure
+// or in case of failure the exception has wrong message
+subject.ShouldBeFail(ex => Assert.Equal("something went wrong", ex.Message));
+```
+
 ## TryOptionAsync
 * ```ShouldBeSome<T>(Action<T> someValidation)```
 * ```ShouldBeNone<T>()```

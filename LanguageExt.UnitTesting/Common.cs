@@ -22,6 +22,12 @@ namespace LanguageExt.UnitTesting
         internal static void ThrowIfLeft<T>(T _)
             => throw new Exception("Expected Right, got Left instead.");
 
+        internal static void ThrowExpectedFailGotSome<T>(T _)
+            => throw new Exception("Expected Fail, got Some instead.");
+
+        internal static void ThrowExpectedFailGotNone()
+            => throw new Exception("Expected Fail, got None instead.");
+
         internal static void SuccessfulNone()
         { 
             /* we should end up in here*/
