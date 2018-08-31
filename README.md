@@ -17,6 +17,20 @@ subject.ShouldBeSome(some => Assert.Equal(5, some));
 subject.ShouldBeNone();
 ```
 
+## OptionAsync
+* ```ShouldBeSome<T>(Action<T> someValidation)```
+* ```ShouldBeNone<T>()```
+```C#
+OptionAsync<int> subject = UnitUnderTest();
+
+// the following line throws an exception if subject is OptionAsync<int>.None 
+// or the integer value wrapped by Some does not equal 5
+await subject.ShouldBeSome(some => Assert.Equal(5, some));
+
+// the following line throws an exception if subject is not OptionAsync<int>.None
+await subject.ShouldBeNone();
+```
+
 ## Validation
 * ```ShouldBeSuccess<TFail, TSuccess>(Action<TSuccess> successValidation)```
 * ```ShouldBeFail<TFail, TSuccess>(Action<IEnumerable<TFail>> failValidation)```

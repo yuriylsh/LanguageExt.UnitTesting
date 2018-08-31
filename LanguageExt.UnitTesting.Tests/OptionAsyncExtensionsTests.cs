@@ -23,7 +23,7 @@ namespace LanguageExt.UnitTesting.Tests
         }
 
         [Fact]
-        public static async void ShouldBeSome_GivenSome_RunsValidation()
+        public static async Task ShouldBeSome_GivenSome_RunsValidation()
         {
             var validationRan = false;
             await GetSome().ShouldBeSome(x => validationRan = true);
@@ -31,10 +31,10 @@ namespace LanguageExt.UnitTesting.Tests
         }
 
         [Fact]
-        public static void ShouldBeNone_GivenNone_DoesNotThrow()
+        public static async Task ShouldBeNone_GivenNone_DoesNotThrow()
         {
             Func<Task> act = () => GetNone().ShouldBeNone();
-            act();
+            await act();
         }
 
         private static OptionAsync<string> GetNone() => OptionAsync<string>.None;
