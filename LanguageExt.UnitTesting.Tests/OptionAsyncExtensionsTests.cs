@@ -31,6 +31,12 @@ namespace LanguageExt.UnitTesting.Tests
         }
 
         [Fact]
+        public static async Task ShouldBeSome_GivenSome_DoesNotThrow()
+        {
+            await GetSome().ShouldBeSome();
+        }
+
+        [Fact]
         public static async Task ShouldBeNone_GivenNone_DoesNotThrow()
         {
             Func<Task> act = () => GetNone().ShouldBeNone();

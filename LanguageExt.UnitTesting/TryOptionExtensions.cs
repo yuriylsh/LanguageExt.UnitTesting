@@ -4,9 +4,10 @@ namespace LanguageExt.UnitTesting
 {
     public static class TryOptionExtensions
     {
-        public static void ShouldBeSome<T>(this TryOption<T> @this, Action<T> someValidation)
+        public static void ShouldBeSome<T>(this TryOption<T> @this,
+                                           Action<T> someValidation = null)
             => @this.Match(
-                Some: someValidation,
+                Some: someValidation ?? Common.Noop,
                 None: Common.ThrowIfNone,
                 Fail: ex => throw ex
             );
@@ -18,11 +19,15 @@ namespace LanguageExt.UnitTesting
                 Fail: ex => throw ex
             );
 
-        public static void ShouldBeFail<T>(this TryOption<T> @this, Action<Exception> failValidation)
-            => @this.Match(
+        public static void ShouldBeFail<T>(this TryOption<T> @this,
+                                           Action<Exception> failValidation = null)
+        {
+            failValidation = failValidation ?? Common.Noop;
+            @this.Match(
                 Some: Common.ThrowExpectedFailGotSome,
                 None: Common.ThrowExpectedFailGotNone,
                 Fail: ex => failValidation(ex)
             );
+        }
     }
 }

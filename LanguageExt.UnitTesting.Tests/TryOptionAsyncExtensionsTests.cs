@@ -29,6 +29,12 @@ namespace LanguageExt.UnitTesting.Tests
             await GetFail().ShouldBeFail(x => validationRan = true);
             validationRan.Should().BeTrue();
         }
+        
+        [Fact]
+        public static async Task ShouldBeFail_GivenFail_DoesNotThrow()
+        {
+            await GetFail().ShouldBeFail();
+        }
 
         [Fact]
         public static void ShouldBeSome_GivenNone_Throws()
@@ -48,11 +54,18 @@ namespace LanguageExt.UnitTesting.Tests
         public static async Task ShouldBeSome_GivenSome_RunsValidation()
         {
             var validationRan = false;
-            await GetSuccessSome().ShouldBeSome(x => {
-                    x.Should().Be(123);
-                    validationRan = true;
-                });
+            await GetSuccessSome().ShouldBeSome(x =>
+            {
+                x.Should().Be(123);
+                validationRan = true;
+            });
             validationRan.Should().BeTrue();
+        }
+
+        [Fact]
+        public static async Task ShouldBeSome_GivenSome_DoesNotThrow()
+        {
+            await GetSuccessSome().ShouldBeSome();
         }
 
         [Fact]

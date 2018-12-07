@@ -31,11 +31,23 @@ namespace LanguageExt.UnitTesting.Tests
         }
 
         [Fact]
+        public static async Task ShouldBeLeft_GivenLeft_DoesNotThrow()
+        {
+            await GetLeft().ShouldBeLeft();
+        }
+
+        [Fact]
         public static async Task ShouldBeRight_GivenRight_RunsValidation()
         {
             var validationRan = false;
             await GetRight().ShouldBeRight(x => validationRan = true);
             validationRan.Should().BeTrue();
+        }
+        
+        [Fact]
+        public static async Task ShouldBeRight_GivenRight_DoesNotThrow()
+        {
+            await GetRight().ShouldBeRight();
         }
 
         private static EitherAsync<int, string> GetLeft() => 123;

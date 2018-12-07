@@ -28,6 +28,9 @@ namespace LanguageExt.UnitTesting.Tests
             GetSome().ShouldBeSome(x => validationRan = true);
             validationRan.Should().BeTrue();
         }
+        
+        [Fact]
+        public static void ShouldBeSome_GivenSome_NoValidation_DoesNotThrow() => GetSome().ShouldBeSome();
 
         [Fact]
         public static void ShouldBeNone_GivenNone_DoesNotThrow() => GetNone().ShouldBeNone();

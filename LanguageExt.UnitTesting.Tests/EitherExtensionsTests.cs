@@ -30,11 +30,23 @@ namespace LanguageExt.UnitTesting.Tests
         }
 
         [Fact]
+        public static void ShouldBeLeft_GivenLeft_DoesNotThrow()
+        {
+            GetLeft().ShouldBeLeft();
+        }
+
+        [Fact]
         public static void ShouldBeRight_GivenRight_RunsValidation()
         {
             var validationRan = false;
             GetRight().ShouldBeRight(x => validationRan = true);
             validationRan.Should().BeTrue();
+        }
+
+        [Fact]
+        public static void ShouldBeRight_GivenRight_DoesNotThrow()
+        {
+            GetRight().ShouldBeRight();
         }
 
         private static Either<int, string> GetLeft() => 123;

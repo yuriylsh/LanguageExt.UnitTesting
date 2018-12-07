@@ -28,6 +28,12 @@ namespace LanguageExt.UnitTesting.Tests
             GetFail().ShouldBeFail(x => validationRan = true);
             validationRan.Should().BeTrue();
         }
+        
+        [Fact]
+        public static void ShouldBeFail_GivenFail_DoesNotThrow()
+        {
+            GetFail().ShouldBeFail();
+        }
 
         [Fact]
         public static void ShouldBeSome_GivenNone_Throws()
@@ -47,11 +53,18 @@ namespace LanguageExt.UnitTesting.Tests
         public static void ShouldBeSome_GivenSome_RunsValidation()
         {
             var validationRan = false;
-            GetSuccessSome().ShouldBeSome(x => {
-                    x.Should().Be(123);
-                    validationRan = true;
-                });
+            GetSuccessSome().ShouldBeSome(x =>
+            {
+                x.Should().Be(123);
+                validationRan = true;
+            });
             validationRan.Should().BeTrue();
+        }
+
+        [Fact]
+        public static void ShouldBeSome_GivenSome_DoesNotThrow()
+        {
+            GetSuccessSome().ShouldBeSome();
         }
 
         [Fact]

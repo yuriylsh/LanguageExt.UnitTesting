@@ -30,11 +30,22 @@ namespace LanguageExt.UnitTesting.Tests
         }
 
         [Fact]
+        public static void ShouldBeFail_GivenFail_DoesNotThrow()
+        {
+            GetFail().ShouldBeFail();
+        }
+
+        [Fact]
         public static void ShouldBeSuccess_GivenSuccess_RunsValidation()
         {
             var validationRan = false;
             GetSuccess().ShouldBeSuccess(x => validationRan = true);
             validationRan.Should().BeTrue();
+        }
+        [Fact]
+        public static void ShouldBeSuccess_GivenSuccess_DoesNotThrow()
+        {
+            GetSuccess().ShouldBeSuccess();
         }
 
         private static Try<string> GetFail() => () => throw new Exception();
