@@ -2,8 +2,6 @@
 using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
-using static LanguageExt.UnitTesting.Tests.TestsHelper;
-
 namespace LanguageExt.UnitTesting.Tests
 {
     public static class TryAsyncExtensionsTests
@@ -11,32 +9,30 @@ namespace LanguageExt.UnitTesting.Tests
         [Fact]
         public static void ShouldBeFail_GivenSuccess_Throws()
         {
-            Func<Task> act = () => GetSuccess().ShouldBeFail(ValidationNoop);
+            Func<Task> act = () => GetSuccess().ShouldBeFail();
             act.Should().Throw<Exception>().WithMessage("Expected Fail, got Success instead.");
         }
 
         [Fact]
         public static void ShouldBeSuccess_GivenFail_Throws()
         {
-            Func<Task> act = () => GetFail().ShouldBeSuccess(ValidationNoop);
+            Func<Task> act = () => GetFail().ShouldBeSuccess();
             act.Should().Throw<Exception>().WithMessage("Expected Success, got Fail instead.");
         }
 
         [Fact]
-        public static async Task ShouldBeFail_GivenFail_RunsValidation()
+        public static async Task ShouldBeFail_GivenFailWithValidation_RunsValidation()
         {
             var validationRan = false;
             await GetFail().ShouldBeFail(x => validationRan = true);
             validationRan.Should().BeTrue();
         }
         [Fact]
-        public static async Task ShouldBeFail_GivenFail_DoesNotThrow()
-        {
-            await GetFail().ShouldBeFail();
-        }
+        public static async Task ShouldBeFail_GivenFailNoValidation_DoesNotThrow()
+            => await GetFail().ShouldBeFail();
 
         [Fact]
-        public static async Task ShouldBeSuccess_GivenSuccess_RunsValidation()
+        public static async Task ShouldBeSuccess_GivenSuccessWithValidation_RunsValidation()
         {
             var validationRan = false;
             await GetSuccess().ShouldBeSuccess(x => validationRan = true);
@@ -44,10 +40,8 @@ namespace LanguageExt.UnitTesting.Tests
         }
         
         [Fact]
-        public static async Task ShouldBeSuccess_GivenSuccess_DoesNotThrow()
-        {
-            await GetSuccess().ShouldBeSuccess();
-        }
+        public static async Task ShouldBeSuccess_GivenSuccessNoValidation_DoesNotThrow()
+            => await GetSuccess().ShouldBeSuccess();
 
         private static TryAsync<string> GetFail() => () => throw new Exception();
         private static TryAsync<string> GetSuccess() => async () => await Task.FromResult("success");

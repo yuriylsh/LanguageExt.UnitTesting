@@ -1,7 +1,6 @@
 ﻿using System;
 using FluentAssertions;
 using Xunit;
-using static LanguageExt.UnitTesting.Tests.TestsHelper;
 
 namespace LanguageExt.UnitTesting.Tests
 {
@@ -10,19 +9,19 @@ namespace LanguageExt.UnitTesting.Tests
         [Fact]
         public static void ShouldBeFail_GivenSuccessSome_Throws()
         {
-            Action act = () => GetSuccessSome().ShouldBeFail(ValidationNoop);
+            Action act = () => GetSuccessSome().ShouldBeFail();
             act.Should().Throw<Exception>().WithMessage("Expected Fail, got Some instead.");
         }
 
         [Fact]
         public static void ShouldBeFail_GivenSuccessNone_Throws()
         {
-            Action act = () => GetSuccessNone().ShouldBeFail(ValidationNoop);
+            Action act = () => GetSuccessNone().ShouldBeFail();
             act.Should().Throw<Exception>().WithMessage("Expected Fail, got None instead.");
         }
 
         [Fact]
-        public static void ShouldBeFail_GivenFail_RunsValidation()
+        public static void ShouldBeFail_GivenFailWithValidation_RunsValidation()
         {
             var validationRan = false;
             GetFail().ShouldBeFail(x => validationRan = true);
@@ -30,27 +29,25 @@ namespace LanguageExt.UnitTesting.Tests
         }
         
         [Fact]
-        public static void ShouldBeFail_GivenFail_DoesNotThrow()
-        {
-            GetFail().ShouldBeFail();
-        }
+        public static void ShouldBeFail_GivenFailNoValidation_DoesNotThrow()
+            => GetFail().ShouldBeFail();
 
         [Fact]
         public static void ShouldBeSome_GivenNone_Throws()
         {
-            Action act = () => GetSuccessNone().ShouldBeSome(ValidationNoop);
+            Action act = () => GetSuccessNone().ShouldBeSome();
             act.Should().Throw<Exception>().WithMessage("Expected Some, got None instead.");
         }
 
         [Fact]
         public static void ShouldBeSome_GivenFail_Throws()
         {
-            Action act = () => GetFail().ShouldBeSome(ValidationNoop);
+            Action act = () => GetFail().ShouldBeSome();
             act.Should().Throw<Exception>().WithMessage("something went wrong");
         }
 
         [Fact]
-        public static void ShouldBeSome_GivenSome_RunsValidation()
+        public static void ShouldBeSome_GivenSomeWithValidation_RunsValidation()
         {
             var validationRan = false;
             GetSuccessSome().ShouldBeSome(x =>
@@ -62,10 +59,8 @@ namespace LanguageExt.UnitTesting.Tests
         }
 
         [Fact]
-        public static void ShouldBeSome_GivenSome_DoesNotThrow()
-        {
-            GetSuccessSome().ShouldBeSome();
-        }
+        public static void ShouldBeSome_GivenSomeNoValidation_DoesNotThrow()
+            => GetSuccessSome().ShouldBeSome();
 
         [Fact]
         public static void ShouldBeNone_GivenSome_Throws()
@@ -83,9 +78,7 @@ namespace LanguageExt.UnitTesting.Tests
 
         [Fact]
         public static void ShouldBeNone_GivenNone_DoesNotThrow()
-        {
-            GetSuccessNone().ShouldBeNone();
-        }
+            => GetSuccessNone().ShouldBeNone();
 
         private static TryOption<int> GetFail() => () => throw new Exception("something went wrong");
         private static TryOption<int> GetSuccessSome() => () => 123;

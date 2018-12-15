@@ -5,8 +5,7 @@ namespace LanguageExt.UnitTesting
     
     public static class OptionExtensions
     {
-        public static void ShouldBeSome<T>(this Option<T> @this,
-                                           Action<T> someValidation = null)
+        public static void ShouldBeSome<T>(this Option<T> @this, Action<T> someValidation = null)
             => @this.Match(
                 Some: someValidation ?? Common.Noop,
                 None: Common.ThrowIfNone);

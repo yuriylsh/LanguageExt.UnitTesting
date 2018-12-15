@@ -1,7 +1,6 @@
 ﻿using System;
 using FluentAssertions;
 using Xunit;
-using static LanguageExt.UnitTesting.Tests.TestsHelper;
 
 namespace LanguageExt.UnitTesting.Tests
 {
@@ -10,7 +9,7 @@ namespace LanguageExt.UnitTesting.Tests
         [Fact]
         public static void ShouldBeSome_GivenNone_Throws()
         {
-            Action act = () => GetNone().ShouldBeSome(ValidationNoop);
+            Action act = () => GetNone().ShouldBeSome();
             act.Should().Throw<Exception>().WithMessage("Expected Some, got None instead.");
         }
 
@@ -22,7 +21,7 @@ namespace LanguageExt.UnitTesting.Tests
         }
 
         [Fact]
-        public static void ShouldBeSome_GivenSome_RunsValidation()
+        public static void ShouldBeSome_GivenSomeWithValidation_RunsValidation()
         {
             var validationRan = false;
             GetSome().ShouldBeSome(x => validationRan = true);
@@ -30,7 +29,8 @@ namespace LanguageExt.UnitTesting.Tests
         }
         
         [Fact]
-        public static void ShouldBeSome_GivenSome_NoValidation_DoesNotThrow() => GetSome().ShouldBeSome();
+        public static void ShouldBeSome_GivenSomeNoValidation_DoesNotThrow()
+            => GetSome().ShouldBeSome();
 
         [Fact]
         public static void ShouldBeNone_GivenNone_DoesNotThrow() => GetNone().ShouldBeNone();
