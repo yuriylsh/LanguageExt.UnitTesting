@@ -16,15 +16,15 @@
     <RepositoryUrl>https://github.com/yuriylsh/LanguageExt.UnitTesting.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>LanguageExt</PackageTags>
-    <PackageReleaseNotes>Adding OptionAsync extenstion methods (thanks @beeleebow for the contribution).</PackageReleaseNotes>
+    <PackageReleaseNotes>Adding non-validating extenstion method overloads (thanks @ovstetun for the contribution).</PackageReleaseNotes>
     <Copyright>Yuriy Lyeshchenko © 2018</Copyright>
-    <AssemblyVersion>3.1.0.0</AssemblyVersion>
-    <FileVersion>3.1.0.0</FileVersion>
-    <Version>3.1.0</Version>
+    <AssemblyVersion>3.1.14.0</AssemblyVersion>
+    <FileVersion>3.1.14.0</FileVersion>
+    <Version>3.1.14</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LanguageExt.Core" Version="3.0.0" />
+    <PackageReference Include="LanguageExt.Core" Version="3.1.14" />
   </ItemGroup>
 
 </Project>
