@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
-using static LanguageExt.UnitTesting.Tests.TestsHelper;
 
 namespace LanguageExt.UnitTesting.Tests
 {
@@ -11,49 +10,58 @@ namespace LanguageExt.UnitTesting.Tests
         [Fact]
         public static void ShouldBeFail_GivenSuccessSome_Throws()
         {
-            Func<Task> act = () => GetSuccessSome().ShouldBeFail(ValidationNoop);
+            Func<Task> act = () => GetSuccessSome().ShouldBeFail();
             act.Should().Throw<Exception>().WithMessage("Expected Fail, got Some instead.");
         }
 
         [Fact]
         public static void ShouldBeFail_GivenSuccessNone_Throws()
         {
-            Func<Task> act = () => GetSuccessNone().ShouldBeFail(ValidationNoop);
+            Func<Task> act = () => GetSuccessNone().ShouldBeFail();
             act.Should().Throw<Exception>().WithMessage("Expected Fail, got None instead.");
         }
 
         [Fact]
-        public static async Task ShouldBeFail_GivenFail_RunsValidation()
+        public static async Task ShouldBeFail_GivenFailWithValidation_RunsValidation()
         {
             var validationRan = false;
             await GetFail().ShouldBeFail(x => validationRan = true);
             validationRan.Should().BeTrue();
         }
+        
+        [Fact]
+        public static async Task ShouldBeFail_GivenFailNoValidation_DoesNotThrow()
+            => await GetFail().ShouldBeFail();
 
         [Fact]
         public static void ShouldBeSome_GivenNone_Throws()
         {
-            Func<Task> act = () => GetSuccessNone().ShouldBeSome(ValidationNoop);
+            Func<Task> act = () => GetSuccessNone().ShouldBeSome();
             act.Should().Throw<Exception>().WithMessage("Expected Some, got None instead.");
         }
 
         [Fact]
         public static void ShouldBeSome_GivenFail_Throws()
         {
-            Func<Task> act = () => GetFail().ShouldBeSome(ValidationNoop);
+            Func<Task> act = () => GetFail().ShouldBeSome();
             act.Should().Throw<Exception>().WithMessage("something went wrong");
         }
 
         [Fact]
-        public static async Task ShouldBeSome_GivenSome_RunsValidation()
+        public static async Task ShouldBeSome_GivenSomeWithValidation_RunsValidation()
         {
             var validationRan = false;
-            await GetSuccessSome().ShouldBeSome(x => {
-                    x.Should().Be(123);
-                    validationRan = true;
-                });
+            await GetSuccessSome().ShouldBeSome(x =>
+            {
+                x.Should().Be(123);
+                validationRan = true;
+            });
             validationRan.Should().BeTrue();
         }
+
+        [Fact]
+        public static async Task  ShouldBeSome_GivenSomeNoValidation_DoesNotThrow()
+            => await GetSuccessSome().ShouldBeSome();
 
         [Fact]
         public static void ShouldBeNone_GivenSome_Throws()

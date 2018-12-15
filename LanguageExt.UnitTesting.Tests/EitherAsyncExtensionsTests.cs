@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
-using static LanguageExt.UnitTesting.Tests.TestsHelper;
 
 namespace LanguageExt.UnitTesting.Tests
 {
@@ -11,19 +10,19 @@ namespace LanguageExt.UnitTesting.Tests
         [Fact]
         public static void ShouldBeRight_GivenLeft_Throws()
         {
-            Func<Task> act = () => GetLeft().ShouldBeRight(ValidationNoop);
+            Func<Task> act = () => GetLeft().ShouldBeRight();
             act.Should().Throw<Exception>().WithMessage("Expected Right, got Left instead.");
         }
 
         [Fact]
         public static void ShouldBeLeft_GivenRight_Throws()
         {
-            Func<Task> act = () => GetRight().ShouldBeLeft(ValidationNoop);
+            Func<Task> act = () => GetRight().ShouldBeLeft();
             act.Should().Throw<Exception>().WithMessage("Expected Left, got Right instead.");
         }
 
         [Fact]
-        public static async Task ShouldBeLeft_GivenLeft_RunsValidation()
+        public static async Task ShouldBeLeft_GivenLeftWithValidation_RunsValidation()
         {
             var validationRan = false;
             await GetLeft().ShouldBeLeft(x => validationRan = true);
@@ -31,12 +30,20 @@ namespace LanguageExt.UnitTesting.Tests
         }
 
         [Fact]
-        public static async Task ShouldBeRight_GivenRight_RunsValidation()
+        public static async Task ShouldBeLeft_GivenLeftNoValidation_DoesNotThrow()
+            => await GetLeft().ShouldBeLeft();
+
+        [Fact]
+        public static async Task ShouldBeRight_GivenRightWithValidation_RunsValidation()
         {
             var validationRan = false;
             await GetRight().ShouldBeRight(x => validationRan = true);
             validationRan.Should().BeTrue();
         }
+        
+        [Fact]
+        public static async Task ShouldBeRight_GivenRightNoValidation_DoesNotThrow()
+            => await GetRight().ShouldBeRight();
 
         private static EitherAsync<int, string> GetLeft() => 123;
         private static EitherAsync<int, string> GetRight() => "right";

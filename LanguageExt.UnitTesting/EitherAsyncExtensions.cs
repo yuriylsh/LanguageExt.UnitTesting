@@ -5,10 +5,12 @@ namespace LanguageExt.UnitTesting
 {
     public static class EitherAsyncExtensions
     {
-        public static async Task ShouldBeRight<TLeft, TRight>(this EitherAsync<TLeft, TRight> @this, Action<TRight> rightValidation)
-            => await @this.Match(rightValidation, Common.ThrowIfLeft);
+        public static async Task ShouldBeRight<TLeft, TRight>(this EitherAsync<TLeft, TRight> @this,
+                                                              Action<TRight> rightValidation = null)
+            => await @this.Match(rightValidation ?? Common.Noop, Common.ThrowIfLeft);
 
-        public static async Task ShouldBeLeft<TLeft, TRight>(this EitherAsync<TLeft, TRight> @this, Action<TLeft> leftValidation)
-            => await @this.Match(Common.ThrowIfRight, leftValidation);
+        public static async Task ShouldBeLeft<TLeft, TRight>(this EitherAsync<TLeft, TRight> @this,
+                                                             Action<TLeft> leftValidation = null)
+            => await @this.Match(Common.ThrowIfRight, leftValidation ?? Common.Noop);
     }
 }

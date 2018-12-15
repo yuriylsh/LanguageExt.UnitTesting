@@ -32,5 +32,7 @@ namespace LanguageExt.UnitTesting
         { 
             /* we should end up in here*/
         }
+
+        internal static void Noop<T>(T _) {} 
     }
 }

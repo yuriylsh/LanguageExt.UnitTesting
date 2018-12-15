@@ -13,6 +13,9 @@ Option<int> subject = UnitUnderTest();
 // or the integer value wrapped by Some does not equal 5
 subject.ShouldBeSome(some => Assert.Equal(5, some));
 
+// the following line throws an exception if subject is Option<int>.None 
+subject.ShouldBeSome();
+
 // the following line throws an exception if subject is not Option<int>.None
 subject.ShouldBeNone();
 ```
@@ -26,6 +29,9 @@ OptionAsync<int> subject = UnitUnderTest();
 // the following line throws an exception if subject is OptionAsync<int>.None 
 // or the integer value wrapped by Some does not equal 5
 await subject.ShouldBeSome(some => Assert.Equal(5, some));
+
+// the following line throws an exception if subject is OptionAsync<int>.None 
+await subject.ShouldBeSome();
 
 // the following line throws an exception if subject is not OptionAsync<int>.None
 await subject.ShouldBeNone();
@@ -41,9 +47,15 @@ Validation<string, int> subject = UnitUnderTest();
 // or in case of successful validation the integer value does not equal 5
 subject.ShouldBeSuccess(success => Assert.Equal(5, success));
 
+// the following line throws an exception if subject represents failure
+subject.ShouldBeSuccess();
+
 // the following line throws an exception if subject does not represent failed validation
 // or in case of failed validation the failure value does not meet expectation
 subject.ShouldBeFail(errors => Assert("value is not valid", errors.First()));
+
+// the following line throws an exception if subject does not represent failed validation
+subject.ShouldBeFail();
 ```
 
 ## Either
@@ -56,9 +68,15 @@ Either<string, int> subject = UnitUnderTest();
 // or in case of right side of Either when the integer value does not equal 5
 subject.ShouldBeRight(right => Assert.Equal(5, right));
 
+// the following line throws an exception if subject represents left side of Either
+subject.ShouldBeRight();
+
 // the following line throws an exception if subject represents right side of Either
 // or in case of left side of Either when the string value does not equal "abcd"
 subject.ShouldBeLeft(left => Assert.Equal("abcd", left));
+
+// the following line throws an exception if subject represents right side of Either
+subject.ShouldBeLeft();
 ```
 
 
@@ -72,9 +90,15 @@ EitherAsync<string, int> subject = UnitUnderTest();
 // or in case of right side of Either when the integer value does not equal 5
 await subject.ShouldBeRight(right => Assert.Equal(5, right));
 
+// the following line throws an exception if subject represents left side of Either
+await subject.ShouldBeRight();
+
 // the following line throws an exception if subject represents right side of Either
 // or in case of left side of Either when the string value does not equal "abcd"
 await subject.ShouldBeLeft(left => Assert.Equal("abcd", left));
+
+// the following line throws an exception if subject represents right side of Either
+await subject.ShouldBeLeft();
 ```
 
 ## Try
@@ -87,9 +111,15 @@ Try<int> subject = UnitUnderTest();
 // or in case of successful try the integer value does not equal 5
 subject.ShouldBeSuccess(success => Assert.Equal(5, success));
 
+// the following line throws an exception if subject represents failure
+subject.ShouldBeSuccess();
+
 // the following line throws an exception if subject does not represent failure
 // or in case of failure the exception has wrong message
 subject.ShouldBeFail(ex => Assert.Equal("something went wrong", ex.Message));
+
+// the following line throws an exception if subject does not represent failure
+subject.ShouldBeFail();
 ```
 
 ## TryAsync
@@ -102,9 +132,15 @@ TryAsync<int> subject = UnitUnderTest();
 // or in case of successful try the integer value does not equal 5
 await subject.ShouldBeSuccess(success => Assert.Equal(5, success));
 
+// the following line throws an exception if subject represents failure
+await subject.ShouldBeSuccess();
+
 // the following line throws an exception if subject does not represent failure
 // or in case of failure the  exception has wrong message
 await subject.ShouldBeFail(ex => Assert.Equal("something went wrong", ex.Message));
+
+// the following line throws an exception if subject does not represent failure
+await subject.ShouldBeFail();
 ```
 
 ## TryOption
@@ -118,12 +154,18 @@ TryOption<int> subject = UnitUnderTest();
 // or the integer value wrapped by Some does not equal 5
 subject.ShouldBeSome(some => Assert.Equal(5, some));
 
+// the following line throws an exception if subject represents failure or Option<T>.None
+subject.ShouldBeSome(some => Assert.Equal(5, some));
+
 // the following line throws an exception if subject is not Option<int>.None
 subject.ShouldBeNone();
 
 // the following line throws an exception if subject does not represent failure
 // or in case of failure the exception has wrong message
 subject.ShouldBeFail(ex => Assert.Equal("something went wrong", ex.Message));
+
+// the following line throws an exception if subject does not represent failure
+subject.ShouldBeFail();
 ```
 
 ## TryOptionAsync
@@ -137,10 +179,16 @@ TryOptionAsync<int> subject = UnitUnderTest();
 // or the integer value wrapped by Some does not equal 5
 await subject.ShouldBeSome(some => Assert.Equal(5, some));
 
+// the following line throws an exception if subject represents failure or Option<T>.None
+await subject.ShouldBeSome();
+
 // the following line throws an exception if subject is not Option<int>.None
 await subject.ShouldBeNone();
 
 // the following line throws an exception if subject does not represent failure
 // or in case of failure the exception has wrong message
 await subject.ShouldBeFail(ex => Assert.Equal("something went wrong", ex.Message));
+
+// the following line throws an exception if subject does not represent failure
+await subject.ShouldBeFail();
 ```
