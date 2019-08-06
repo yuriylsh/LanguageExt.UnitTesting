@@ -10,7 +10,7 @@ namespace LanguageExt.UnitTesting
             => @this.Match(successValidation ?? Common.Noop, Common.ThrowIfFail);
 
         public static void ShouldBeFail<TFail, TSuccess>(this Validation<TFail, TSuccess> @this,
-                                                         Action<IEnumerable<TFail>> failValidation = null)
+                                                         Action<Seq<TFail>> failValidation = null)
             => @this.Match(Common.ThrowIfSuccess, failValidation ?? Common.Noop);
     }
 }
