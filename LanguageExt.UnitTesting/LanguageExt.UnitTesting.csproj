@@ -16,15 +16,15 @@
     <RepositoryUrl>https://github.com/yuriylsh/LanguageExt.UnitTesting.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>LanguageExt</PackageTags>
-    <PackageReleaseNotes>Adding non-validating extenstion method overloads (thanks @ovstetun for the contribution).</PackageReleaseNotes>
-    <Copyright>Yuriy Lyeshchenko © 2018</Copyright>
-    <AssemblyVersion>3.3.5.0</AssemblyVersion>
-    <FileVersion>3.3.5.0</FileVersion>
-    <Version>3.3.5</Version>
+    <PackageReleaseNotes>Adding Fin extenstion methods</PackageReleaseNotes>
+    <Copyright>Yuriy Lyeshchenko © 2023</Copyright>
+    <AssemblyVersion>3.4.0.0</AssemblyVersion>
+    <FileVersion>3.4.0.0</FileVersion>
+    <Version>3.4.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LanguageExt.Core" Version="3.3.5" />
+    <PackageReference Include="LanguageExt.Core" Version="4.0.0" />
   </ItemGroup>
 
 </Project>

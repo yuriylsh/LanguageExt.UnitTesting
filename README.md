@@ -58,6 +58,28 @@ subject.ShouldBeFail(errors => Assert("value is not valid", errors.First()));
 subject.ShouldBeFail();
 ```
 
+
+## Fin
+* ```ShouldBeSuccess<TSuccess>(Action<TSuccess> successFin)```
+* ```ShouldBeError<Error>(Action<IEnumerable<TFail>> errFin)```
+```C#
+Fin<int> subject = UnitUnderTest();
+
+// the following line throws an exception if subject represents error
+// or in case of successful validation the integer value does not equal 5
+subject.ShouldBeSuccess(success => Assert.Equal(5, success));
+
+// the following line throws an exception if subject represents failure
+subject.ShouldBeSuccess();
+
+// the following line throws an exception if subject does not represent failed fin
+// or in case of failed validation the failure value does not meet expectation
+subject.ShouldBeFail(error => Assert("value is not valid", error.Message));
+
+// the following line throws an exception if subject does not represent failed fin
+subject.ShouldBeFail();
+```
+
 ## Either
 * ```ShouldBeRight<TLeft, TRight>(Action<TRight> rightValidation)```
 * ```ShouldBeLeft<TLeft, TRight>(Action<TLeft> leftValidation)```
