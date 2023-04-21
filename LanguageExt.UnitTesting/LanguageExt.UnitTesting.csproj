@@ -11,13 +11,13 @@
     <Authors>Yuriy Lyeshchenko</Authors>
     <Description>Extension methods to simplify writing unit tests for code written using LanguageExt library</Description>
     <PackageProjectUrl>https://github.com/yuriylsh/LanguageExt.UnitTesting</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/yuriylsh/LanguageExt.UnitTesting/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/yuriylsh/LanguageExt.UnitTesting</RepositoryUrl>
     <RepositoryUrl>https://github.com/yuriylsh/LanguageExt.UnitTesting.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>LanguageExt</PackageTags>
     <PackageReleaseNotes>Adding Fin extenstion methods</PackageReleaseNotes>
-    <Copyright>Yuriy Lyeshchenko © 2023</Copyright>
+    <Copyright>Yuriy Lyeshchenko © 2018</Copyright>
     <AssemblyVersion>3.4.0.0</AssemblyVersion>
     <FileVersion>3.4.0.0</FileVersion>
     <Version>3.4.0</Version>
