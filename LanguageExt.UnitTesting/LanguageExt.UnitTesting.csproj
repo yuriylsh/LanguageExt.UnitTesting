@@ -18,13 +18,13 @@
     <PackageTags>LanguageExt</PackageTags>
     <PackageReleaseNotes>Adding Fin extenstion methods</PackageReleaseNotes>
     <Copyright>Yuriy Lyeshchenko © 2018</Copyright>
-    <AssemblyVersion>3.4.0.0</AssemblyVersion>
-    <FileVersion>3.4.0.0</FileVersion>
-    <Version>3.4.0</Version>
+    <AssemblyVersion>4.4.9.0</AssemblyVersion>
+    <FileVersion>4.4.9.0</FileVersion>
+    <Version>4.4.9</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LanguageExt.Core" Version="4.0.0" />
+    <PackageReference Include="LanguageExt.Core" Version="4.4.9" />
   </ItemGroup>
 
 </Project>

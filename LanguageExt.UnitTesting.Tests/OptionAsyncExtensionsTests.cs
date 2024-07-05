@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
 
@@ -8,17 +6,17 @@ namespace LanguageExt.UnitTesting.Tests
     public static class OptionAsyncExtensionsTests
     {
         [Fact]
-        public static void ShouldBeSome_GivenNone_Throws()
+        public static async Task ShouldBeSome_GivenNone_Throws()
         {
             Func<Task> act = () => GetNone().ShouldBeSome();
-            act.Should().Throw<Exception>().WithMessage("Expected Some, got None instead.");
+            await act.Should().ThrowAsync<Exception>().WithMessage("Expected Some, got None instead.");
         }
 
         [Fact]
-        public static void ShouldBeNone_GivenSome_Throws()
+        public static async Task ShouldBeNone_GivenSome_Throws()
         {
             Func<Task> act = () => GetSome().ShouldBeNone();
-            act.Should().Throw<Exception>().WithMessage("Expected None, got Some instead.");
+            await act.Should().ThrowAsync<Exception>().WithMessage("Expected None, got Some instead.");
         }
 
         [Fact]

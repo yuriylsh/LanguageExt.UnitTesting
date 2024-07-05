@@ -1,23 +1,21 @@
-﻿using System;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Xunit;
 namespace LanguageExt.UnitTesting.Tests
 {
     public static class TryAsyncExtensionsTests
     {
         [Fact]
-        public static void ShouldBeFail_GivenSuccess_Throws()
+        public static async Task ShouldBeFail_GivenSuccess_Throws()
         {
             Func<Task> act = () => GetSuccess().ShouldBeFail();
-            act.Should().Throw<Exception>().WithMessage("Expected Fail, got Success instead.");
+            await act.Should().ThrowAsync<Exception>().WithMessage("Expected Fail, got Success instead.");
         }
 
         [Fact]
-        public static void ShouldBeSuccess_GivenFail_Throws()
+        public static async Task ShouldBeSuccess_GivenFail_Throws()
         {
             Func<Task> act = () => GetFail().ShouldBeSuccess();
-            act.Should().Throw<Exception>().WithMessage("Expected Success, got Fail instead.");
+            await act.Should().ThrowAsync<Exception>().WithMessage("Expected Success, got Fail instead.");
         }
 
         [Fact]

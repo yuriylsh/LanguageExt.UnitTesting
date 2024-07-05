@@ -1,5 +1,5 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
+using LanguageExt.Common;
 using static LanguageExt.Prelude;
 using Xunit;
 
@@ -45,6 +45,10 @@ namespace LanguageExt.UnitTesting.Tests
         [Fact]
         public static void ShouldBeSuccess_GivenSuccessNoFail_DoesNotThrow()
             => GetSuccess().ShouldBeSuccess();
+
+        [Fact]
+        public static void ShoulBeFail_GivenFailedFin_DoesNotThrow()
+            => Fin<Unit>.Fail(Error.New(5, "Test Error")).ShouldBeFail();
 
         private static Fin<string> GetFail() => FinFail<string>("error");
         private static Fin<string> GetSuccess() => FinSucc("success");

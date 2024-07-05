@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Xunit;
 
 namespace LanguageExt.UnitTesting.Tests
@@ -8,17 +6,17 @@ namespace LanguageExt.UnitTesting.Tests
     public static class EitherAsyncExtensionsTests
     {
         [Fact]
-        public static void ShouldBeRight_GivenLeft_Throws()
+        public static async Task ShouldBeRight_GivenLeft_Throws()
         {
             Func<Task> act = () => GetLeft().ShouldBeRight();
-            act.Should().Throw<Exception>().WithMessage("Expected Right, got Left instead.");
+            await act.Should().ThrowAsync<Exception>().WithMessage("Expected Right, got Left instead.");
         }
 
         [Fact]
-        public static void ShouldBeLeft_GivenRight_Throws()
+        public static async Task ShouldBeLeft_GivenRight_Throws()
         {
             Func<Task> act = () => GetRight().ShouldBeLeft();
-            act.Should().Throw<Exception>().WithMessage("Expected Left, got Right instead.");
+            await act.Should().ThrowAsync<Exception>().WithMessage("Expected Left, got Right instead.");
         }
 
         [Fact]

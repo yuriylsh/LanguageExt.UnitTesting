@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Xunit;
 
 namespace LanguageExt.UnitTesting.Tests
@@ -8,17 +6,17 @@ namespace LanguageExt.UnitTesting.Tests
     public static class TryOptionAsyncExtensionsTests
     {
         [Fact]
-        public static void ShouldBeFail_GivenSuccessSome_Throws()
+        public static async Task ShouldBeFail_GivenSuccessSome_Throws()
         {
             Func<Task> act = () => GetSuccessSome().ShouldBeFail();
-            act.Should().Throw<Exception>().WithMessage("Expected Fail, got Some instead.");
+            await act.Should().ThrowAsync<Exception>().WithMessage("Expected Fail, got Some instead.");
         }
 
         [Fact]
-        public static void ShouldBeFail_GivenSuccessNone_Throws()
+        public static async Task ShouldBeFail_GivenSuccessNone_Throws()
         {
             Func<Task> act = () => GetSuccessNone().ShouldBeFail();
-            act.Should().Throw<Exception>().WithMessage("Expected Fail, got None instead.");
+            await act.Should().ThrowAsync<Exception>().WithMessage("Expected Fail, got None instead.");
         }
 
         [Fact]
@@ -34,17 +32,17 @@ namespace LanguageExt.UnitTesting.Tests
             => await GetFail().ShouldBeFail();
 
         [Fact]
-        public static void ShouldBeSome_GivenNone_Throws()
+        public static async Task ShouldBeSome_GivenNone_Throws()
         {
             Func<Task> act = () => GetSuccessNone().ShouldBeSome();
-            act.Should().Throw<Exception>().WithMessage("Expected Some, got None instead.");
+            await act.Should().ThrowAsync<Exception>().WithMessage("Expected Some, got None instead.");
         }
 
         [Fact]
-        public static void ShouldBeSome_GivenFail_Throws()
+        public static async Task ShouldBeSome_GivenFail_Throws()
         {
             Func<Task> act = () => GetFail().ShouldBeSome();
-            act.Should().Throw<Exception>().WithMessage("something went wrong");
+            await act.Should().ThrowAsync<Exception>().WithMessage("something went wrong");
         }
 
         [Fact]
@@ -64,17 +62,17 @@ namespace LanguageExt.UnitTesting.Tests
             => await GetSuccessSome().ShouldBeSome();
 
         [Fact]
-        public static void ShouldBeNone_GivenSome_Throws()
+        public static async Task ShouldBeNone_GivenSome_Throws()
         {
             Func<Task> act = () => GetSuccessSome().ShouldBeNone();
-            act.Should().Throw<Exception>().WithMessage("Expected None, got Some instead.");
+            await act.Should().ThrowAsync<Exception>().WithMessage("Expected None, got Some instead.");
         }
 
         [Fact]
-        public static void ShouldBeNone_GivenFail_Throws()
+        public static async Task ShouldBeNone_GivenFail_Throws()
         {
             Func<Task> act = () => GetFail().ShouldBeNone();
-            act.Should().Throw<Exception>().WithMessage("something went wrong");
+            await act.Should().ThrowAsync<Exception>().WithMessage("something went wrong");
         }
 
         [Fact]
