@@ -214,3 +214,23 @@ await subject.ShouldBeFail(ex => Assert.Equal("something went wrong", ex.Message
 // the following line throws an exception if subject does not represent failure
 await subject.ShouldBeFail();
 ```
+## Result
+* ```ShouldBeSuccess<T>(Action<T> successValidation)```
+* ```ShouldBeFail<T>(Action<Error> failValidation)```
+```C#
+Result<int> subject = UnitUnderTest();
+
+// the following line throws an exception if subject represents failure
+// or in case of successful result the integer value does not equal 5
+subject.ShouldBeSuccess(success => Assert.Equal(5, success));
+
+// the following line throws an exception if subject represents failure
+subject.ShouldBeSuccess();
+
+// the following line throws an exception if subject does not represent failure
+// or in case of failed result the failure value does not meet expectation
+subject.ShouldBeFail(error => Assert("value is not valid", error.Message));
+
+// the following line throws an exception if subject does not represent failed result
+subject.ShouldBeFail();
+```
