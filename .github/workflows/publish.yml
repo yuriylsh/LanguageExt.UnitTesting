@@ -39,7 +39,7 @@ jobs:
         id: nuget-login
         uses: NuGet/login@v1
         with:
-          api-key-source-url: https://api.nuget.org/v3/index.json
+          user: yuriylsh
 
       - name: Push
         run: >
