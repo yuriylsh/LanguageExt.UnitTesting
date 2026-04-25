@@ -18,7 +18,12 @@
     <PackageTags>LanguageExt</PackageTags>
     <Copyright>Yuriy Lyeshchenko © 2018</Copyright>
     <MinVerTagPrefix></MinVerTagPrefix>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="LanguageExt.Core" Version="4.4.9" />
