@@ -16,15 +16,13 @@
     <RepositoryUrl>https://github.com/yuriylsh/LanguageExt.UnitTesting.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>LanguageExt</PackageTags>
-    <PackageReleaseNotes>Adding Fin extenstion methods</PackageReleaseNotes>
     <Copyright>Yuriy Lyeshchenko © 2018</Copyright>
-    <AssemblyVersion>4.4.9.0</AssemblyVersion>
-    <FileVersion>4.4.9.0</FileVersion>
-    <Version>4.4.9</Version>
+    <MinVerTagPrefix></MinVerTagPrefix>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="LanguageExt.Core" Version="4.4.9" />
+    <PackageReference Include="MinVer" Version="7.0.0" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>
